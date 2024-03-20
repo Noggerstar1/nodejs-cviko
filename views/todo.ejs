@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Todo - <%= todo.title %></title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .todo-detail-container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .todo-detail-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .todo-info {
+      margin-bottom: 20px;
+    }
+
+    .todo-info p {
+      margin: 5px 0;
+    }
+
+    .todo-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .edit-todo-form input[type="text"] {
+      width: calc(90% - 50px);
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .edit-todo-form button {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: auto;
+    }
+
+    .edit-todo-form button:hover {
+      background-color: #0056b3;
+    }
+
+    .link-home-container {
+      margin-top: 20px;
+    }
+
+    .link-home {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .link-home:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="todo-detail-container">
+  <h1>Detail Todo - <%= todo.title %></h1>
+
+  <div class="todo-info">
+    <p><strong>Název:</strong> <%= todo.title %></p>
+    <p><strong>Status:</strong> <%= todo.done ? 'Dokončený' : 'Nedokončený' %></p>
+  </div>
+
+  <div class="todo-actions">
+    <a href="/toggle-todo/<%= todo.id %>">
+      <%= todo.done ? 'Označit jako nedokončený' : 'Označit jako dokončený' %>
+    </a>
+    <a href="/remove-todo/<%= todo.id %>">
+      Smazat Todo
+    </a>
+  </div>
+
+  <div>
+    <h2>Upravit název Todo</h2>
+    <form class="edit-todo-form" method="post" action="/update-todo/<%= todo.id %>">
+      <input type="text" placeholder="Název todočka" name="title">
+      <button type="submit">Upravit</button>
+    </form>
+  </div>
+
+  <div class="link-home-container">
+    <a href="/" class="link-home" >Zpět na seznam</a>
+  </div>
+</div>
+
+
+</body>
+</html>
