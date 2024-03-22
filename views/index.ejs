@@ -11,7 +11,6 @@
       padding: 0;
       background-color: #f4f4f4;
     }
-
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -20,46 +19,45 @@
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
     h1 {
       text-align: center;
     }
-
     ul {
       list-style: none;
       padding: 0;
     }
-
     li {
       padding: 10px;
       border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
     li:last-child {
       border-bottom: none;
     }
-
     .todo-title {
       color: #333;
       text-decoration: none;
+      flex-grow: 1;
     }
-
+    .todo-priority {
+      margin-right: 20px;
+      font-weight: bold;
+    }
     .actions {
       float: right;
     }
-
     .actions a {
       margin-left: 10px;
       color: #007bff;
       text-decoration: none;
     }
-
     .add-todo-form {
       margin-top: 20px;
       display: flex;
       align-items: center;
     }
-
     .add-todo-form input[type="text"] {
       width: calc(95% - 50px);
       padding: 8px;
@@ -67,7 +65,6 @@
       border-radius: 4px;
       font-size: 16px;
     }
-
     .add-todo-form button {
       padding: 8px 15px;
       background-color: #007bff;
@@ -78,11 +75,9 @@
       font-size: 16px;
       margin-left: auto;
     }
-
     .add-todo-form button:hover {
       background-color: #0056b3;
     }
-
   </style>
 </head>
 <body>
@@ -96,6 +91,10 @@
         <a class="todo-title" href="/todo/<%= todo.id %>">
           <%= todo.title %>
         </a>
+
+        <span class="todo-priority">
+          Priority: <%= todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1) %>
+        </span>
         <div class="actions">
           <a href="/remove-todo/<%= todo.id %>">Odebrat</a>
           <a href="/toggle-todo/<%= todo.id %>">
@@ -110,7 +109,6 @@
     <input type="text" placeholder="Název todočka" name="title">
     <button type="submit">Přidat</button>
   </form>
-
 
 </div>
 

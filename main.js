@@ -38,6 +38,7 @@ app.post('/add-todo', async (req, res) => {
   const todo = {
     title: req.body.title,
     done: false,
+    priority: "low"
   }
 
   await db('todos').insert(todo)
@@ -46,11 +47,28 @@ app.post('/add-todo', async (req, res) => {
 })
 
 app.post('/update-todo/:id', async (req, res, next) => {
+
+  if(!req.body.title) {
+    res.redirect('back')
+    return
+  }
+
   const todo = await db('todos').select('*').where('id', req.params.id).first()
 
   if (!todo) return next()
 
   await db('todos').update({ title: req.body.title }).where('id', todo.id)
+
+  res.redirect('back')
+})
+
+app.post('/update-priority/:id', async (req, res, next) => {
+
+  const todo = await db('todos').select('*').where('id', req.params.id).first()
+
+  if (!todo) return next()
+
+  await db('todos').update({ priority: req.body.priority }).where('id', todo.id)
 
   res.redirect('back')
 })

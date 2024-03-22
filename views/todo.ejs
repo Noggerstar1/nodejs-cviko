@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detail Todo - <%= todo.title %></title>
-  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -72,13 +71,33 @@
     .link-home {
       display: block;
       margin-top: 20px;
-      text-align: center;
       text-decoration: none;
       color: #007bff;
     }
 
     .link-home:hover {
       text-decoration: underline;
+    }
+
+    .edit-priority-form input[type="number"] {
+      width: calc(90% - 50px);
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .edit-priority-form button {
+      padding: 8px 15px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: auto;
+    }
+    .edit-priority-form button:hover {
+      background-color: #218838;
     }
 
   </style>
@@ -91,6 +110,7 @@
   <div class="todo-info">
     <p><strong>Název:</strong> <%= todo.title %></p>
     <p><strong>Status:</strong> <%= todo.done ? 'Dokončený' : 'Nedokončený' %></p>
+    <p><strong>Priorita:</strong> <%= todo.priority %></p>
   </div>
 
   <div class="todo-actions">
@@ -107,6 +127,18 @@
     <form class="edit-todo-form" method="post" action="/update-todo/<%= todo.id %>">
       <input type="text" placeholder="Název todočka" name="title">
       <button type="submit">Upravit</button>
+    </form>
+  </div>
+
+  <div>
+    <h2>Upravit Prioritu</h2>
+    <form class="edit-priority-form" method="post" action="/update-priority/<%= todo.id %>">
+      <select name="priority">
+        <option value="low" <%= todo.priority === 'low' ? 'selected' : '' %>>Low</option>
+        <option value="normal" <%= todo.priority === 'normal' ? 'selected' : '' %>>Normal</option>
+        <option value="high" <%= todo.priority === 'high' ? 'selected' : '' %>>High</option>
+      </select>
+      <button type="submit">Aktualizovat Prioritu</button>
     </form>
   </div>
 
